@@ -131,6 +131,8 @@ class ShuffleNetV2(nn.Module):
         x = self.conv5(x)
         x = x.mean([2, 3])  # globalpool
         x = self.fc(x)
+        x = torch.sigmoid(x)
+        x = 1 - x
         return x
 
     def forward(self, x):

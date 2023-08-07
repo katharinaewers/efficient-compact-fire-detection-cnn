@@ -69,8 +69,8 @@ def read_img(frame, np_transforms):
 
 def run_model_img(args, frame, model):
     output = model(frame)
-    pred = torch.round(torch.sigmoid(output))
-    return pred
+    #pred = torch.round(torch.sigmoid(output))
+    return output
 
 ##########################################################################
 
@@ -79,7 +79,7 @@ def run_model_img(args, frame, model):
 
 def draw_pred(args, frame, pred, fps_frame):
     height, width, _ = frame.shape
-    if prediction == 1:
+    if pred < 0.5:
         if args.image or args.webcam:
             print(f'\t\t|____No-Fire | fps {fps_frame}')
         cv2.rectangle(frame, (0, 0), (width, height), (0, 0, 255), 2)
